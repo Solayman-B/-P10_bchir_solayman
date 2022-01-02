@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'authentication',
+    'projects',
 ]
 
 MIDDLEWARE = [
@@ -56,9 +57,7 @@ ROOT_URLCONF = 'SoftDesk.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            'SoftDesk/templates/SoftDesk/'
-        ],
+        'DIRS': [BASE_DIR / 'SoftDesk/templates/SoftDesk/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

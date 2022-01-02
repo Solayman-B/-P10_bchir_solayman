@@ -1,8 +1,7 @@
 from django.urls import path
-from authentication import views
+from projects import views
 
-app_name = 'authentication'
-
+app_name='projects'
 urlpatterns = [
     path('', views.home, name='home'),
 ]
