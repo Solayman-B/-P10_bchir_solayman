@@ -25,8 +25,8 @@ INSTALLED_APPS = [
 	'django.contrib.staticfiles',
 	'rest_framework',
 	'authentication',
-	'projects',
-	'rest_framework_simplejwt',
+	'content',
+	# 'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
@@ -44,7 +44,7 @@ ROOT_URLCONF = 'SoftDesk.urls'
 TEMPLATES = [
 	{
 		'BACKEND': 'django.template.backends.django.DjangoTemplates',
-		'DIRS': [BASE_DIR / 'SoftDesk/templates/SoftDesk/'],
+		'DIRS': [BASE_DIR / 'SoftDesk/'],
 		'APP_DIRS': True,
 		'OPTIONS': {
 			'context_processors': [
@@ -110,11 +110,11 @@ STATICFILES_DIRS = [BASE_DIR / "SoftDesk/static"]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'authentication.User'
+AUTH_USER_MODEL = 'authentication.Users'
 
 LOGIN_URL = 'authentication:login'
 
-LOGIN_REDIRECT_URL = 'projects:projects'
+LOGIN_REDIRECT_URL = 'content:content'
 
 LOGOUT_REDIRECT_URL = 'authentication:login'
 
@@ -122,12 +122,10 @@ REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ],
-	'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-		'PAGE_SIZE': 10,
+        'rest_framework.permissions.IsAuthenticated',
+    ]
 
-	'DEFAULT_AUTHENTICATION_CLASSES': (
-		'rest_framework_simplejwt.authentication.JWTAuthentication',
-	)
+	# 'DEFAULT_AUTHENTICATION_CLASSES': (
+	# 	'rest_framework_simplejwt.authentication.JWTAuthentication',
+	# )
 }
