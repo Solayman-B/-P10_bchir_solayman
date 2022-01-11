@@ -1,3 +1,4 @@
+from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,7 +27,7 @@ INSTALLED_APPS = [
 	'rest_framework',
 	'authentication',
 	'content',
-	# 'rest_framework_simplejwt',
+	'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
@@ -121,11 +122,19 @@ LOGOUT_REDIRECT_URL = 'authentication:login'
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ]
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ],
+	'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+	'PAGE_SIZE': 100,
+	'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework_simplejwt.authentication.JWTAuthentication',),
+	'DEFAULT_FILTER_BACKENDS': [
+		'django_filters.rest_framework.DjangoFilterBackend',
+		'rest_framework.filters.SearchFilter'
+	]
+}
 
-	# 'DEFAULT_AUTHENTICATION_CLASSES': (
-	# 	'rest_framework_simplejwt.authentication.JWTAuthentication',
-	# )
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=99),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=99),
 }

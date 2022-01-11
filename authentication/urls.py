@@ -4,7 +4,7 @@ from rest_framework import routers
 
 router = routers.SimpleRouter()
 
-router.register('users', UsersViewset, basename='users')
+router.register('signup', UsersViewset, basename='signup')
 
 app_name='authentication'
 urlpatterns = [
