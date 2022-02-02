@@ -1,10 +1,10 @@
 from rest_framework.viewsets import ModelViewSet
-from authentication.models import Users
-from authentication.serializers import UsersSerializer
+from authentication.models import User
+from authentication.serializers import UserSerializer
 
 
-class UsersViewset(ModelViewSet):
-    serializer_class = UsersSerializer
+class UserViewset(ModelViewSet):
+    serializer_class = UserSerializer
 
     def get_queryset(self):
-        return Users.objects.all()
+        return User.objects.all()

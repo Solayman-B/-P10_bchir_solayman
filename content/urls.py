@@ -1,17 +1,20 @@
 from django.urls import path, include
-from content.views import ProjectsViewset, ContributorsViewset, IssuesViewset, CommentsViewset
-from rest_framework import routers
+from content.views import ProjectViewset, ContributorViewset, IssueViewset, CommentViewset
+from rest_framework_nested import routers
 
 router = routers.SimpleRouter()
+router.register('projects', ProjectViewset, basename='projects')
 
-router.register('projects', ProjectsViewset, basename='projects')
-router.register('contributors', ContributorsViewset, basename='contributors')
-router.register('issues', IssuesViewset, basename='issues')
-router.register('comments', CommentsViewset, basename='comments')
+project_router = routers.NestedSimpleRouter(router, 'projects', lookup='project')
+project_router.register('users', ContributorViewset, basename='users')
+project_router.register('issues', IssueViewset, basename='issues')
+
+issue_router = routers.NestedSimpleRouter(project_router, 'issues', lookup='issue')
+issue_router.register('comments', CommentViewset, basename='comments')
 
 app_name='content'
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls')),
+    path('', include(project_router.urls)),
 ]

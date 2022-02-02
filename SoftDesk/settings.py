@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-1r_01pcc+_ieo_+umzy0brgb6it7!iv4mal5!e7n9&e6-%2qv@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -25,9 +25,9 @@ INSTALLED_APPS = [
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
 	'rest_framework',
+	'rest_framework_simplejwt',
 	'authentication',
 	'content',
-	'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
@@ -74,18 +74,18 @@ DATABASES = {
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-	{
-		'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-	},
-	{
-		'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-	},
-	{
-		'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-	},
-	{
-		'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-	},
+	# {
+	# 	'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+	# },
+	# {
+	# 	'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+	# },
+	# {
+	# 	'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+	# },
+	# {
+	# 	'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+	# },
 ]
 
 # Internationalization
@@ -111,7 +111,7 @@ STATICFILES_DIRS = [BASE_DIR / "SoftDesk/static"]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'authentication.Users'
+AUTH_USER_MODEL = 'authentication.User'
 
 LOGIN_URL = 'authentication:login'
 
@@ -126,8 +126,10 @@ REST_FRAMEWORK = {
     #     'rest_framework.permissions.IsAuthenticated',
     # ],
 	'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-	'PAGE_SIZE': 100,
-	'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework_simplejwt.authentication.JWTAuthentication',),
+	'PAGE_SIZE': 10,
+	'DEFAULT_AUTHENTICATION_CLASSES': (
+		'rest_framework_simplejwt.authentication.JWTAuthentication',
+		),
 	'DEFAULT_FILTER_BACKENDS': [
 		'django_filters.rest_framework.DjangoFilterBackend',
 		'rest_framework.filters.SearchFilter'
@@ -138,3 +140,4 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=99),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=99),
 }
+

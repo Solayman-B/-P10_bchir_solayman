@@ -1,22 +1,30 @@
+from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
-from content.models import Projects, Contributors, Issues, Comments
+from content.models import Project, Contributor, Issue, Comment
 
-class ContributorsSerializer(ModelSerializer):
+class ContributorSerializer(ModelSerializer):
     class Meta:
-        model = Contributors
-        fields = ['user', 'project', 'permission', 'role']
+        model = Contributor
+        fields = '__all__'
 
-class ProjectsSerializer(ModelSerializer):
+class ProjectSerializer(ModelSerializer):
     class Meta:
-        model = Projects
-        fields = ['id', 'title', 'description', 'type', 'author']
+        model = Project
+        fields = '__all__'
 
-class IssuesSerializer(ModelSerializer):
-    class Meta:
-        model = Issues
-        fields = ['title', 'description', 'tag', 'priority', 'project',	'status', 'author', 'assignee', 'created_time']
+    def validate_title(self, value):
+        # Nous vérifions que la catégorie existe
+        if Project.objects.filter(title=value).exists():
+            # En cas d'erreur, DRF nous met à disposition l'exception ValidationError
+            raise serializers.ValidationError('Ce titre existe déjà')
+        return value
 
-class CommentsSerializer(ModelSerializer):
+class IssueSerializer(ModelSerializer):
     class Meta:
-        model = Comments
-        fields = ['comment', 'description', 'author', 'issue', 'created_time']
+        model = Issue
+        fields = '__all__'
+
+class CommentSerializer(ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = '__all__'

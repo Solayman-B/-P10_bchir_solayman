@@ -1,8 +1,22 @@
-from rest_framework.permissions import BasePermission
+from rest_framework import permissions
 
 
-class IsAdminAuthenticated(BasePermission):
+class IsAdminAuthenticated(permissions.BasePermission):
 
 	def has_permission(self, request, view):
 		# Ne donnons l’accès qu’aux utilisateurs administrateurs authentifiés
 		return bool(request.user and request.user.is_authenticated and request.user.is_superuser)
+
+class IsProjectAuthor(permissions.BasePermission):
+
+	def has_object_permission(self, request, view, obj):
+
+		if request.user.is_superuser:
+			return True
+
+		if request.method in permissions.SAFE_METHODS:
+			return True
+
+		#self.request.user.project.filter(author=self.request.user.id)
+		if obj.author == request.user:
+			return True
