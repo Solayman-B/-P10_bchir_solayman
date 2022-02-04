@@ -1,22 +1,26 @@
 from rest_framework import permissions
+from .models import Contributor
 
 
-class IsAdminAuthenticated(permissions.BasePermission):
-
-	def has_permission(self, request, view):
-		# Ne donnons l’accès qu’aux utilisateurs administrateurs authentifiés
-		return bool(request.user and request.user.is_authenticated and request.user.is_superuser)
-
-class IsProjectAuthor(permissions.BasePermission):
+class IsAuthorOrReadOnly(permissions.BasePermission):
+	message = "Action impossible, seul l'auteur y est autorisé."
 
 	def has_object_permission(self, request, view, obj):
-
-		if request.user.is_superuser:
-			return True
-
 		if request.method in permissions.SAFE_METHODS:
 			return True
 
-		#self.request.user.project.filter(author=self.request.user.id)
 		if obj.author == request.user:
 			return True
+
+# class IsContributor(permissions.BasePermission):
+# 	message = "Accès refusé, vous n'êtes pas contributeur du projet."
+#
+# 	def has_permission(self, request, view):
+# 		if request.user.is_authenticated:
+# 			return True
+#
+# 	def has_object_permission(self, request, view, obj):
+# 		contributor = Contributor.objects.filter(project=obj.id)
+# 		# print(contributor.filter(user=request.user), 'REQUESTREQUESTREQUESTREQUESTREQUESTREQUESTREQUESTREQUESTREQUESTREQUESTREQUESTREQUESTREQUESTREQUESTREQUESTREQUEST')
+# 		if request.method in permissions.SAFE_METHODS:
+# 			return contributor.filter(user=request.user)
