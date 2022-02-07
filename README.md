@@ -1,4 +1,4 @@
-# P9_bchir_solayman
+# P10_bchir_solayman
 
 Summaries
 ---------
@@ -11,9 +11,7 @@ Summaries
 General description
 -------------
 
-This application is an MVP for the website LITReview who allows registered users to ask a review on a book / article by creating a ticket.
-Members of the site could respond to the ticket by giving a notation and remarks, called a review.
-They can follow people of their choices to read their posts. The application was developed with Django framework 3.
+The SoftDesk API, is an issue tracking system REST API developped by SoftDesk limited.
 
 
 Requirements
@@ -21,26 +19,24 @@ Requirements
 
 This application uses the following packets:
 
+* apiwrapper==0.1.8
 * asgiref==3.4.1
-* attrs==21.2.0
-* coverage==6.2
-* Django==3.2.7
-* iniconfig==1.1.1
-* packaging==21.3
-* pluggy==1.0.0
-* py==1.11.0
-* pyparsing==3.0.6
-* pytest==6.2.5
-* pytest-cov==3.0.0
-* pytest-splinter==3.3.1
-* pytz==2021.1
-* selenium==3.141.0
-* six==1.16.0
-* splinter==0.16.0
+* certifi==2021.10.8
+* charset-normalizer==2.0.10
+* Django==4.0
+* django-filter==21.1
+* djangorestframework==3.13.1
+* djangorestframework-simplejwt==5.0.0
+* drf-nested-routers==0.93.4
+* idna==3.3
+* importlib-metadata==4.10.0
+* Markdown==3.3.6
+* PyJWT==2.3.0
+* pytz==2021.3
+* requests==2.27.1
 * sqlparse==0.4.2
-* toml==0.10.2
-* tomli==1.2.2
-* urllib3==1.26.7
+* urllib3==1.26.8
+* zipp==3.7.0
 
 
 Installation
@@ -50,13 +46,13 @@ First, you can download this project by :
 
 clicking on « code » then « download ZIP »
 
-or [click here to download it directly](https://github.com/Solayman-B/P4_bchir_solayman/archive/refs/heads/main.zip)
+or [click here to download it directly](https://github.com/Solayman-B/P10_bchir_solayman/archive/refs/heads/main.zip)
 
 Unzip the file when the download is completed
 
 You can also install [Git via this link](https://git-scm.com/downloads) and use :
 
-    gh repo clone Solayman-B/P9_bchir_solayman
+    gh repo clone Solayman-B/P10_bchir_solayman
 
 
 To use this application properly, you need to use [python3](https://www.python.org/downloads/)
@@ -85,7 +81,7 @@ You can install all the required paquets with:
 Run
 ---
 
-Go to the folder containing the project and use `python3 main.py runserver` then open your internet browser and go to [http://127.0.0.1:8000/](http://127.0.0.1:8000/
-). You can now subscribe and log you in to use the website.
+Go to the folder containing the project and use `python3 main.py runserver` then open Postman or another program of your choice and go to [http://127.0.0.1:8000/signup/](http://127.0.0.1:8000/signup/
+) to register. You can read [the postman documentation here](https://documenter.getpostman.com/view/19329986/UVeJJPpX) to see examples of all the URIs of the project.
 
 
